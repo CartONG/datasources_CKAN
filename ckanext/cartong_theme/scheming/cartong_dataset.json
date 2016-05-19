@@ -56,6 +56,10 @@
           "label": "Santé"
         },
         {
+          "value": "demography",
+          "label": "Démographie"
+        },
+        {
           "value": "eduction",
           "label": "Education "
         },
