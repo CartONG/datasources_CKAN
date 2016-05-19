@@ -62,9 +62,8 @@ Activer le virtual env
 
 ```
 
-# clone des sources
+Clone des sources
 ```
-
 pip install -e 'git+https://github.com/ckan/ckan.git@ckan-2.5.2#egg=ckan'
 ```
 
@@ -177,7 +176,6 @@ solr                                  100%[=====================================
 Remplacer le schema.xml de solr par défaut par un lien symbolique vers les sources CKAN
 Replace the default schema.xml file with a symlink to the CKAN schema file included in the sources.
 ```
-
 sudo mv /etc/solr/conf/schema.xml /etc/solr/conf/schema.xml.bak
 sudo ln -s /usr/lib/ckan/default/src/ckan/ckan/config/solr/schema.xml /etc/solr/conf/schema.xml
 ```
@@ -317,7 +315,7 @@ sudo /etc/init.d/nginx restart
 
 
 
-# créer un super admin user sudatasource
+Créer un super admin user sudatasource
 ```
 . /usr/lib/ckan/default/bin/activate
 cd /usr/lib/ckan/default/src/ckan
@@ -325,25 +323,31 @@ paster sysadmin add sudatasource -c /etc/ckan/default/production.ini
 ```
 
 
-# installer Postgis
+Installer l'extention Postgis
+```
 sudo apt-get install postgresql-9.4-postgis
+```
 
-# créer les fonctions et les tables spatialref
+Créer les fonctions et les tables spatialref
+```
 sudo -u postgres psql -d ckan_default -f /usr/share/postgresql/9.4/contrib/postgis-2.1/postgis.sql
 sudo -u postgres psql -d ckan_default -f /usr/share/postgresql/9.4/contrib/postgis-2.1/spatial_ref_sys.sql
+```
 
-
-# changer le proprietaire des tables
+Changer le proprietaire des tables
+```
 sudo -u postgres psql -d ckan_default -c 'ALTER VIEW geometry_columns OWNER TO ckan_default;'
 sudo -u postgres psql -d ckan_default -c 'ALTER TABLE spatial_ref_sys OWNER TO ckan_default;'
-
-# verification 
+```
+Verification 
+```
 sudo -u postgres psql -d ckan_default -c "SELECT postgis_full_version()"
+```
 
-
-# installer d'autre package / dépendance pour la gestion spatial
+installer d'autre package / dépendance pour la gestion spatial
+```
 sudo apt-get install python-dev libxml2-dev libxslt1-dev libgeos-c1
-
+```
 
 
 
