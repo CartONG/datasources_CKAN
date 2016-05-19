@@ -29,7 +29,7 @@ sudo /etc/init.d/jetty8 restart
 
 sudo /etc/init.d/nginx restart
 sudo /etc/init.d/postgresql restart
-
+```
 
 
 
