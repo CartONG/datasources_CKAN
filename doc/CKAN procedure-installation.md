@@ -351,7 +351,24 @@ sudo apt-get install python-dev libxml2-dev libxslt1-dev libgeos-c1
 
 
 
+# make a git
 
+dans ckanext-cartong-theme
+
+
+# install et init du repo sur l poste de dev
+git init
+# config git
+git config --global user.name ***
+git config --global user.email ***
+
+# .gitignore
+git add -A .
+git commit -m "init"
+
+git remote add origin https://github.com/***/ckanext-cartong_theme.git
+git push origin master
+git pull https://github.com/***/ckanext-cartong_theme.git master
 
 
 # troubleshouting

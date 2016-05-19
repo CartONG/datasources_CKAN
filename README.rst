@@ -43,11 +43,12 @@ Actuellement en développement, cette extention est le theme Cartong de CKAN. Fa
 Requirements
 ------------
 
-ckanext-cartong_theme support la version 2.5.2 de CKAN (https://github.com/ckan/ckan.git@ckan-2.5.2)?
+ckanext-cartong_theme support la version 2.5.2 de CKAN (https://github.com/ckan/ckan.git@ckan-2.5.2)
 
 
-nécéssite l'extention spatiale (https://github.com/okfn/ckanext-spatial.git#egg=ckanext-spatial).
+nécéssite l'extention spatiale (https://github.com/okfn/ckanext-spatial.git).
 
+et l'extention scheming (https://github.com/ckan/ckanext-scheming)
 
 La base est postgresql-9.4-postgis.
 
