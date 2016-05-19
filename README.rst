@@ -36,13 +36,27 @@ ckanext-cartong_theme
    What does it do? What features does it have?
    Consider including some screenshots or embedding a video!
 
+Actuellement en développement, cette extention est le theme Cartong de CKAN. Faite pour référencer les différents catalogues de données disponibles sur le web, elle est un META catalogue. Son principal objectif est de referencer des urls de site "catalogue". La descrition des ressources est faites en fonction des besoins de l'ONG, c'est à dire en fonction des usages humanitaires (risque naturelle, démographie, infrastructure ...). 
+
 
 ------------
 Requirements
 ------------
 
-For example, you might want to mention here which versions of CKAN this
-extension works with.
+ckanext-cartong_theme support la version [2.5.2 de CKAN](https://github.com/ckan/ckan.git@ckan-2.5.2)?
+
+
+nécéssite l'[extention spatiale](https://github.com/okfn/ckanext-spatial.git#egg=ckanext-spatial).
+
+
+La base est postgresql-9.4-postgis.
+
+
+Le serveur Solr Jetty8.
+
+
+Le serveur web Ngnix.
+
 
 
 ------------
