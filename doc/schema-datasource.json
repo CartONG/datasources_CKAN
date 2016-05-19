@@ -1,0 +1,161 @@
+{
+  "scheming_version": 1,
+  "dataset_type": "dataset",
+  "about": "A reimplementation of the default CKAN dataset schema",
+  "about_url": "http://github.com/ckan/ckanext-scheming",
+  "dataset_fields": [
+    {
+      "field_name": "title",
+      "label": "Title",
+      "preset": "title",
+      "form_placeholder": "eg. A descriptive title"
+    },
+    {
+      "field_name": "name",
+      "label": "URL",
+      "preset": "dataset_slug",
+      "form_placeholder": "eg. my-dataset"
+    },    
+    {
+      "field_name": "url",
+      "label": "Source",
+      "form_placeholder": "http://example.com/dataset.org",
+      "display_property": "foaf:homepage",
+      "display_snippet": "link.html",
+      "required" : true
+    },
+    {
+      "field_name": "notes",
+      "label": "Description",
+      "form_snippet": "markdown.html",
+      "form_placeholder": "eg. Some useful notes about the data"
+    },
+    {
+      "field_name": "license_id",
+      "label": "License",
+      "form_snippet": "license.html",
+      "help_text": "License definitions and additional information can be found at http://opendefinition.org/"
+    },
+    {
+      "field_name": "tag_string",
+      "label": "Tags",
+      "preset": "tag_string_autocomplete",
+      "form_placeholder": "eg. economy, mental health, government"
+    },
+    {
+      "field_name": "theme",
+      "label": "Thematique",
+      "preset": "multiple_checkbox",
+      "choices": [
+        {
+          "value": "catnat",
+          "label": "Catastrophe naturelle"
+        },
+        {
+          "value": "health",
+          "label": "Santé"
+        },
+        {
+          "value": "eduction",
+          "label": "Education "
+        },
+        {
+          "value": "building",
+          "label": "Infrastructure "
+        }
+
+      ]
+    },
+
+    {
+      "field_name": "owner_org",
+      "label": "Organization",
+      "preset": "dataset_organization"
+    },
+    {
+      "field_name": "author",
+      "label": "Contributeur",
+      "form_placeholder": "Joe Bloggs",
+      "display_property": "dc:creator"
+    },
+    {
+      "field_name": "author_email",
+      "label": "Email du contributeur",
+      "form_placeholder": "joe@example.com",
+      "display_property": "dc:creator",
+      "display_snippet": "email.html",
+      "display_email_name_field": "author"
+    },
+    {
+            "field_name": "spatial",
+            "label": "Geospatial coverage",
+      "display_property": "dcat:Dataset/dct:spatial",
+            "form_placeholder": "Paste a valid GeoJSON geometry",
+            "form_snippet":"spatial.html",
+            "display_snippet":"spatial.html",
+            "choices": [
+            {"label":"Western Australia",
+                "value":{
+                    "type":"MultiPolygon",
+                    "coordinates":[[[
+                        [128.84765625000003,-11.523087506868514],
+                    [128.67187500000003,-34.88593094075316],
+                    [114.43359375000001,-37.020098201368114],
+                    [110.91796875000001,-19.973348786110602],
+                    [128.84765625000003,-11.523087506868514]
+                        ]]]
+                }
+            },
+            {"label": "IBRA NUL01 Carlisle",
+                "value": {"coordinates": [[[[127.97891231400001, -29.07719802799994],
+                    [128.4196166900001, -29.453792579999973],
+                    [129.00158855100005, -29.3176470399999],
+                    [129.0015363660001, -30.019301357999954],
+                    [128.62449622000008, -30.117902838999953],
+                    [128.6041717820001, -30.345117626999976],
+                    [128.4488678560001, -30.143999056999974],
+                    [128.281463647, -30.405420223999958],
+                    [128.33554083700005, -30.20363629799994],
+                    [127.47898861800002, -29.929881997999928],
+                    [126.03502659000004, -30.43778610399994],
+                    [125.97803501200008, -30.61715514499997],
+                    [125.79311363300008, -30.42799369399995],
+                    [125.18556210900012, -30.68363956199994],
+                    [124.48764042600011, -30.73550040899994],
+                    [124.63977046000002, -30.333997690999983],
+                    [124.93494420900005, -30.365713135999954],
+                    [124.99262243200009, -30.021957372999964],
+                    [124.80995947200006, -29.996629775999963],
+                    [125.19277959800003, -29.65657998699993],
+                    [125.04314418600006, -29.50138100299995],
+                    [125.7674941780001, -28.985576618999968],
+                    [126.88920589200008, -28.89371498299994],
+                    [127.97891231400001, -29.07719802799994]]]],
+                    "type": "MultiPolygon"}}
+            ]
+        }
+    ],
+  "resource_fields": [
+    {
+      "field_name": "url",
+      "label": "URL",
+      "preset": "resource_url_upload"
+    },
+    {
+      "field_name": "name",
+      "label": "Name",
+      "form_placeholder": "eg. January 2011 Gold Prices"
+    },
+    {
+      "field_name": "description",
+      "label": "Description",
+      "form_snippet": "markdown.html",
+      "form_placeholder": "Some useful notes about the data"
+    },
+    {
+      "field_name": "format",
+      "label": "Format",
+      "preset": "resource_format_autocomplete"
+    }
+  ]
+}
