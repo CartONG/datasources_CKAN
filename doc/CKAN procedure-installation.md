@@ -1,90 +1,126 @@
-
-
+Faire les mises à jour des dépots
+```
 sudo apt-get update
+```
 
-# arreter apache
+# Installation serveur web
+Arreter apache (si existant)
+```
 sudo /etc/init.d/apache2 stop
+```
 
-
-# installer nginx apache2 etc.
+Installer nginx apache2 etc..
+```
 sudo apt-get install -y nginx apache2 libapache2-mod-wsgi libpq5
+```
 
-
-# arreter nginx
+Arreter nginx
+```
 sudo /etc/init.d/nginx stop
+```
 
-# redemarer apache
+Redemarer apache
+```
 sudo /etc/init.d/apache2 start
-# redemarer nginx
+```
+Redemarer nginx
+```
 sudo /etc/init.d/nginx restart
+```
 
 
+Installation des dépendances 
 
-# installation des dépendances 
+***Attention*** :installer openjdk-7-jdk au lieu du openjdk-6-jdk
 
-installer openjdk-7-jdk au lieu du openjdk-6-jdk
-
-
+```
 sudo apt-get install python-dev postgresql libpq-dev python-pip python-virtualenv git-core solr-jetty openjdk-7-jdk libapache2-mod-rpaf 
+```
 
 
+# Installer CKAN dans un environment virtuel Python
 
-# Install CKAN into a Python virtual environment
-
-## creer le projet dans home
+Creer le projet dans home
+```
 mkdir -p ~/ckan/lib
 sudo ln -s ~/ckan/lib /usr/lib/ckan
 mkdir -p ~/ckan/etc
 sudo ln -s ~/ckan/etc /etc/ckan
+```
 
-## creer le virtual env 
+Creer le virtual env 
+```
 sudo mkdir -p /usr/lib/ckan/default
 sudo chown `whoami` /usr/lib/ckan/default
 virtualenv --no-site-packages /usr/lib/ckan/default
+```
 
 
-# activer le virtual env
+Activer le virtual env
+```
 . /usr/lib/ckan/default/bin/activate
 
+```
 
 # clone des sources
-pip install -e 'git+https://github.com/ckan/ckan.git@ckan-2.5.2#egg=ckan'
+```
 
-# installer les package python specific dans l'environnement virtuel
+pip install -e 'git+https://github.com/ckan/ckan.git@ckan-2.5.2#egg=ckan'
+```
+
+Installer les packages python CKAN specifiques dans l'environnement virtuel
+```
 pip install -r /usr/lib/ckan/default/src/ckan/requirements.txt
+```
 
 
 
 # Créer la base postgres
 
-## créer un nouvel utilisateur
+Créer un nouvel utilisateur
+
+```
 sudo -u postgres createuser -S -D -R -P ckan_default
 
 mdp : ************
+```
 
-## Créer la base ckan_default 
+Créer la base ckan_default
+```
+
 sudo -u postgres createdb -O ckan_default ckan_default -E utf-8
+```
 
-## verrifier l'existance de la nouvelle base
+Verrifier l'existance de la nouvelle base
+```
 sudo -u postgres psql -l
+```
 
 
 # Create a CKAN config file
-Create a directory to contain the site’s config files:
 
+Creer le dossier contenant les fichiers de config du site
+```
 sudo mkdir -p /etc/ckan/default
 sudo chown -R `whoami` /etc/ckan/
+```
 
 Créer le fichier ini (dev)
+```
+
 paster make-config ckan /etc/ckan/default/development.ini
+```
 
 modifier le fichier development.ini
+```
 
 sqlalchemy.url = postgresql://ckan_default:************@localhost/ckan_default
 
 site_url=http://datasources.cartong.org/
+```
 
 #Configurer Jetty pour Solr
+```
 sudo nano /etc/defautl/jetty8
 
 
@@ -92,11 +128,16 @@ NO_START=0            # (line 4)
 JETTY_HOST=127.0.0.1  # (line 16)
 JETTY_PORT=8983       # (line 19)
 JAVA_HOME=/usr/lib/jvm/java-6-openjdk-amd64/
+```
 
-# Démarrer jetty
+Démarrer jetty
+```
 sudo /etc/init.d/jetty8 start
+```
 
-# verifier que tout va bien
+Verifier que tout va bien sur le site
+
+```
 wget http://localhost:8983
 
 --2016-04-07 16:04:27--  http://localhost:8983/
@@ -109,8 +150,10 @@ Saving to: ‘index.html’
 index.html                            100%[==========================================================================>]   1.06K  --.-KB/s   in 0s
 
 2016-04-07 16:04:27 (201 MB/s) - ‘index.html’ saved [1082/1082]
+```
+et sur Solr
 
-
+```
 
 wget http://localhost:8983/solr
 
@@ -128,48 +171,55 @@ Saving to: ‘solr’
 solr                                  100%[==========================================================================>]     446  --.-KB/s   in 0s
 
 2016-04-07 16:05:58 (98.9 MB/s) - ‘solr’ saved [446/446]
+```
 
 
-#Replace the default schema.xml file with a symlink to the CKAN schema file included in the sources.
+Remplacer le schema.xml de solr par défaut par un lien symbolique vers les sources CKAN
+Replace the default schema.xml file with a symlink to the CKAN schema file included in the sources.
+```
 
 sudo mv /etc/solr/conf/schema.xml /etc/solr/conf/schema.xml.bak
 sudo ln -s /usr/lib/ckan/default/src/ckan/ckan/config/solr/schema.xml /etc/solr/conf/schema.xml
-
-redermarer jetty8
-sudo /etc/init.d/jetty8 restart
-
-# terminer la config solr
-modifier dans development.ini de ckan
-solr_url=http://127.0.0.1:8983/solr
-
-
-# creer les tables de la db
-cd /usr/lib/ckan/default/src/ckan
-paster db init -c /etc/ckan/default/development.ini
-
+```
 
 #Link to who.ini
 who.ini (the Repoze.who configuration file) needs to be accessible in the same directory as your CKAN config file, so create a symlink to it:
-
+```
 ln -s /usr/lib/ckan/default/src/ckan/who.ini /etc/ckan/default/who.ini
 
+```
+redermarer jetty8
+```
+sudo /etc/init.d/jetty8 restart
+```
 
-# runserver
+Terminer la config solr
+modifier dans development.ini de ckan
+```
+solr_url=http://127.0.0.1:8983/solr
+```
 
+
+Initialier les tables de la db
+```
+cd /usr/lib/ckan/default/src/ckan
+paster db init -c /etc/ckan/default/development.ini
+```
+
+Test du runserver
+```
 cd /usr/lib/ckan/default/src/ckan
 paster serve /etc/ckan/default/development.ini
-
-
-
-
+```
 
 
 # Deploiement en Production
-
+```
 cp /etc/ckan/default/development.ini /etc/ckan/default/production.ini
 
 nano /etc/ckan/default/apache.wsgi
-
+```
+```
 import os
 activate_this = os.path.join('/usr/lib/ckan/default/bin/activate_this.py')
 execfile(activate_this, dict(__file__=activate_this))
@@ -179,19 +229,20 @@ config_filepath = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'prod
 from paste.script.util.logging_config import fileConfig
 fileConfig(config_filepath)
 application = loadapp('config:%s' % config_filepath)
+```
 
 
-
-# installer le server mail
+Installer le server mail
+```
 sudo apt-get install postfix
 
 internet site
 datasource.cartong.org
+```
 
 
-
-# apache config file ckan_defaut
-
+Modifier le Apache config file ckan_defaut
+```
 <VirtualHost 127.0.0.1:8080>
     ServerName datasources.cartong.org
     ServerAlias www.datasources.cartong.org
@@ -219,12 +270,13 @@ datasource.cartong.org
     </Directory>
 
 </VirtualHost>
+```
 
-
-# créer le fichier de config nginx 
+Créer le fichier de config nginx 
+```
 nano /etc/nginx/sites-available/ckan
-
-
+```
+```
 proxy_cache_path /tmp/nginx_cache levels=1:2 keys_zone=cache:30m max_size=250m;
 proxy_temp_path /tmp/nginx_proxy 1 2;
 
@@ -245,27 +297,32 @@ server {
 
 }
 
+```
 
-# finir la confiuration des serveurs web nginx et apache2
-
+Finir la confiuration des serveurs web nginx et apache2
+```
 sudo a2ensite ckan_default
 sudo a2dissite 000-default
 sudo rm -vi /etc/nginx/sites-enabled/default
 sudo ln -s /etc/nginx/sites-available/ckan /etc/nginx/sites-enabled/ckan_default
-
-# redemarer apache
+```
+Redemarer apache
+```
 sudo /etc/init.d/apache2 restart
-# redemarer nginx
+```
+Redemarer nginx
+```
 sudo /etc/init.d/nginx restart
-
+```
 
 
 
 # créer un super admin user sudatasource
+```
 . /usr/lib/ckan/default/bin/activate
 cd /usr/lib/ckan/default/src/ckan
 paster sysadmin add sudatasource -c /etc/ckan/default/production.ini
-
+```
 
 
 # installer Postgis
@@ -290,10 +347,6 @@ sudo apt-get install python-dev libxml2-dev libxslt1-dev libgeos-c1
 
 
 
-# Post installation
-## Git connexion 
-
-???
 
 
 
