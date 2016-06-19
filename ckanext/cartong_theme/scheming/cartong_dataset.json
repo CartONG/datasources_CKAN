@@ -71,29 +71,6 @@
       ]
     },
     {
-            "field_name": "spatial",
-            "label": "Geospatial coverage",
-      "display_property": "dcat:Dataset/dct:spatial",
-            "form_placeholder": "Paste a valid GeoJSON geometry",
-            "form_snippet":"spatial.html",
-            "display_snippet":"spatial.html",
-            "choices": [
-            {"label":"Western Australia",
-                "value":{
-                    "type":"MultiPolygon",
-                    "coordinates":[[[
-                        [128.84765625000003,-11.523087506868514],
-                    [128.67187500000003,-34.88593094075316],
-                    [114.43359375000001,-37.020098201368114],
-                    [110.91796875000001,-19.973348786110602],
-                    [128.84765625000003,-11.523087506868514]
-                        ]]]
-                }
-            },
-            ],
-            },
-
-    {
       "field_name": "owner_org",
       "label": "Organization",
       "preset": "dataset_organization"
