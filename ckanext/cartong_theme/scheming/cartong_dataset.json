@@ -80,13 +80,13 @@
             {"label":"Western Australia",
                 "value":{
                     "type":"MultiPolygon",
-                    "coordinates":[[
+                    "coordinates":[[[
                     [2.05827, 49.8625],
                     [2.05827, 55.7447],
                     [-6.41736, 55.7447],
                     [-6.41736, 49.8625],
                     [2.05827, 49.8625]
-                    ]]
+                    ]]]
                 }
             }
             ]
