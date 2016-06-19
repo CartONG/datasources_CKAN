@@ -70,6 +70,10 @@
 
       ]
     },
+    {
+      "field_name": "spatial",
+      "label": "Emprise spatiale",
+    },
 
     {
       "field_name": "owner_org",
