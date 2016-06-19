@@ -79,7 +79,7 @@
             "choices": [
             {"label":"UK",
                 "value":{
-                    "type":"MultiPolygon",
+                    "type":"Polygon",
                     "coordinates":[[[
                     [2.05827, 49.8625],
                     [2.05827, 55.7447],
