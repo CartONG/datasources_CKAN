@@ -89,7 +89,7 @@
       "display_property": "dc:creator",
       "display_snippet": "email.html",
       "display_email_name_field": "author"
-    }
+    } 
     ],
   "resource_fields": [
     {
