@@ -14,6 +14,18 @@ ckan.plugins = (...) spatial_metadata spatial_query
 ckanext.spatial.search_backend = solr
 ```
 
+Ajouter ces paramètres pour modifier les tuiles du widget spatial. (ou mettre à jour CKAN pour que son comportement par defaut ne prennent pas les tuiles mapquests non disponible)
+```
+# Spatial Widget config
+# workaround to get different basemap on the widget
+ckanext.spatial.common_map.type = custom
+ckanext.spatial.common_map.custom.url = https://{s}.tile.thunderforest.com/transport/{z}/{x}/{y}.png
+ckanext.spatial.common_map.attribution = Maps &copy; <a href="http://www.thunderforest.com">Thunderforest</a>, Data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap co$
+```
+
+
+
+
 Configurer le schema solr
 
 
@@ -41,7 +53,7 @@ paster --plugin=ckanext-spatial spatial extents --config=/etc/ckan/default/produ
 
 ```
 
-Chek pgis tables
+Check pgis tables
 
 ```
  sudo -u postgres psql -d ckan_default
