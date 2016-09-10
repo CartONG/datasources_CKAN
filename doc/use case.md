@@ -1,4 +1,4 @@
-# ensemble de parametre utile pour des cas d'usages spécifique
+# ensemble de parametres utiles pour des cas d'usages 
 
 
 bbox for full world
