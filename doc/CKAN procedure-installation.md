@@ -357,23 +357,34 @@ dans ckanext-cartong-theme
 
 
 # install et init du repo sur l poste de dev
+```
 git init
+```
 # config git
 git config --global user.name ***
 git config --global user.email ***
 
 # .gitignore
+
+# command git
+```
 git add -A .
 git commit -m "init"
-
 git remote add origin https://github.com/***/ckanext-cartong_theme.git
 git push origin master
 git pull https://github.com/***/ckanext-cartong_theme.git master
+git pull https://github.com/geodatup/ckanext-cartong_theme.git master
 
+```
 
 # troubleshouting
 
+```
 OSError: [Errno 13] Permission denied: '/tmp/default/sessions/container_file_lock/a'
 
+```
 ajouter cartong au groupe www-data
+
+```
 sudo usermod -a -G www-data cartong
+```
