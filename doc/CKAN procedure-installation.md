@@ -1,40 +1,44 @@
-Faire les mises à jour des dépots
-```
-sudo apt-get update
-```
+
 
 # Installation serveur web
+
+
 Arreter apache (si existant)
+
 ```
 sudo /etc/init.d/apache2 stop
 ```
 
 Installer nginx apache2 etc..
+
 ```
 sudo apt-get install -y nginx apache2 libapache2-mod-wsgi libpq5
 ```
 
 Arreter nginx
+
 ```
 sudo /etc/init.d/nginx stop
 ```
 
 Redemarer apache
+
 ```
 sudo /etc/init.d/apache2 start
 ```
 Redemarer nginx
+
 ```
 sudo /etc/init.d/nginx restart
 ```
 
 
-Installation des dépendances 
+Installation des dépendances :
 
 ***Attention*** :installer openjdk-7-jdk au lieu du openjdk-6-jdk
 
 ```
-sudo apt-get install python-dev postgresql libpq-dev python-pip python-virtualenv git-core solr-jetty openjdk-7-jdk libapache2-mod-rpaf 
+sudo apt-get update && sudo apt-get install python-dev postgresql libpq-dev python-pip python-virtualenv git-core solr-jetty openjdk-7-jdk libapache2-mod-rpaf 
 ```
 
 
@@ -57,12 +61,14 @@ virtualenv --no-site-packages /usr/lib/ckan/default
 
 
 Activer le virtual env
+
 ```
 . /usr/lib/ckan/default/bin/activate
 
 ```
 
 Clone des sources
+
 ```
 pip install -e 'git+https://github.com/ckan/ckan.git@ckan-2.5.2#egg=ckan'
 ```
@@ -85,12 +91,13 @@ mdp : ************
 ```
 
 Créer la base ckan_default
-```
 
+```
 sudo -u postgres createdb -O ckan_default ckan_default -E utf-8
 ```
 
 Verrifier l'existance de la nouvelle base
+
 ```
 sudo -u postgres psql -l
 ```
@@ -99,20 +106,22 @@ sudo -u postgres psql -l
 # Create a CKAN config file
 
 Creer le dossier contenant les fichiers de config du site
+
 ```
 sudo mkdir -p /etc/ckan/default
 sudo chown -R `whoami` /etc/ckan/
 ```
 
 Créer le fichier ini (dev)
+
 ```
 
 paster make-config ckan /etc/ckan/default/development.ini
 ```
 
-modifier le fichier development.ini
-```
+modifier le fichier `development.ini`
 
+```
 sqlalchemy.url = postgresql://ckan_default:************@localhost/ckan_default
 
 site_url=http://datasources.cartong.org/
@@ -182,29 +191,34 @@ sudo ln -s /usr/lib/ckan/default/src/ckan/ckan/config/solr/schema.xml /etc/solr/
 
 #Link to who.ini
 who.ini (the Repoze.who configuration file) needs to be accessible in the same directory as your CKAN config file, so create a symlink to it:
-```
-ln -s /usr/lib/ckan/default/src/ckan/who.ini /etc/ckan/default/who.ini
 
 ```
+ln -s /usr/lib/ckan/default/src/ckan/who.ini /etc/ckan/default/who.ini
+```
+
 redermarer jetty8
+
 ```
 sudo /etc/init.d/jetty8 restart
 ```
 
-Terminer la config solr
-modifier dans development.ini de ckan
+Terminer la config solr 
+modifier dans `development.ini` du dossier ckan
+
 ```
 solr_url=http://127.0.0.1:8983/solr
 ```
 
 
 Initialier les tables de la db
+
 ```
 cd /usr/lib/ckan/default/src/ckan
 paster db init -c /etc/ckan/default/development.ini
 ```
 
 Test du runserver
+
 ```
 cd /usr/lib/ckan/default/src/ckan
 paster serve /etc/ckan/default/development.ini
@@ -230,16 +244,19 @@ application = loadapp('config:%s' % config_filepath)
 ```
 
 
-Installer le server mail
+##Installer le server mail
+
 ```
 sudo apt-get install postfix
-
 internet site
 datasource.cartong.org
 ```
 
 
-Modifier le Apache config file ckan_defaut
+## Configurer le serveur Web
+
+###Modifier le Apache config file : `ckan_defaut`
+
 ```
 <VirtualHost 127.0.0.1:8080>
     ServerName datasources.cartong.org
@@ -270,10 +287,12 @@ Modifier le Apache config file ckan_defaut
 </VirtualHost>
 ```
 
-Créer le fichier de config nginx 
+###Créer le fichier de config nginx 
+
 ```
 nano /etc/nginx/sites-available/ckan
 ```
+
 ```
 proxy_cache_path /tmp/nginx_cache levels=1:2 keys_zone=cache:30m max_size=250m;
 proxy_temp_path /tmp/nginx_proxy 1 2;
@@ -297,76 +316,110 @@ server {
 
 ```
 
-Finir la confiuration des serveurs web nginx et apache2
+###Finir la confiuration des serveurs web nginx et apache2
+
 ```
 sudo a2ensite ckan_default
 sudo a2dissite 000-default
 sudo rm -vi /etc/nginx/sites-enabled/default
 sudo ln -s /etc/nginx/sites-available/ckan /etc/nginx/sites-enabled/ckan_default
 ```
-Redemarer apache
+####Redemarer apache
+
 ```
 sudo /etc/init.d/apache2 restart
 ```
-Redemarer nginx
+####Redemarer nginx
+
 ```
 sudo /etc/init.d/nginx restart
 ```
 
+####Créer un super admin user sudatasource
 
-
-Créer un super admin user sudatasource
 ```
 . /usr/lib/ckan/default/bin/activate
 cd /usr/lib/ckan/default/src/ckan
 paster sysadmin add sudatasource -c /etc/ckan/default/production.ini
 ```
 
+## Base de donnée
 
-Installer l'extention Postgis
+###Installer l'extention Postgis
+
 ```
 sudo apt-get install postgresql-9.4-postgis
 ```
 
-Créer les fonctions et les tables spatialref
+####Créer les fonctions et les tables spatialref
+
 ```
 sudo -u postgres psql -d ckan_default -f /usr/share/postgresql/9.4/contrib/postgis-2.1/postgis.sql
 sudo -u postgres psql -d ckan_default -f /usr/share/postgresql/9.4/contrib/postgis-2.1/spatial_ref_sys.sql
 ```
 
-Changer le proprietaire des tables
+####Changer le proprietaire des tables
+
 ```
 sudo -u postgres psql -d ckan_default -c 'ALTER VIEW geometry_columns OWNER TO ckan_default;'
 sudo -u postgres psql -d ckan_default -c 'ALTER TABLE spatial_ref_sys OWNER TO ckan_default;'
 ```
-Verification 
+####Verification 
+
 ```
 sudo -u postgres psql -d ckan_default -c "SELECT postgis_full_version()"
 ```
 
-installer d'autre package / dépendance pour la gestion spatial
+#####installer d'autre package / dépendance pour la gestion spatial
+
 ```
 sudo apt-get install python-dev libxml2-dev libxslt1-dev libgeos-c1
 ```
 
 
 
-# make a git
+# Doc développeurs 
 
-dans ckanext-cartong-theme
+Pour faire des corrections ou des évolutions sur l'application CKAN on travail avec Git en effectuant des Pull / Push.
+
+Poste de dev >> github >> serveur cartong
+
+Si plusieur Dev, avant chaque push on pull.
+
+Sur le serveur on ne fait que du Pushing ! 
 
 
-# install et init du repo sur l poste de dev
+
+## Repertoire git sur le serveur
+
+Seul les répertoires Git seront mis à jour.
+
+Pour l'instant seul les extentions de CKAN sont gitée :
+
+- ckanext-cartong-theme
+- ckanext-spatial
+- ckanext-sheming
+
+
+## Install et init d'un nouveau repository
 ```
 git init
 ```
-# config git
+
+### config git
+
+```
 git config --global user.name ***
 git config --global user.email ***
+```
 
-# .gitignore
+### .gitignore
 
-# command git
+> à faire
+
+
+### Pense bête des commandes git utiles
+
 ```
 git add -A .
 git commit -m "init"
@@ -379,11 +432,12 @@ git pull https://github.com/geodatup/ckanext-cartong_theme.git master
 
 # troubleshouting
 
+
 ```
 OSError: [Errno 13] Permission denied: '/tmp/default/sessions/container_file_lock/a'
 
 ```
-ajouter cartong au groupe www-data
+Ajouter cartong au groupe www-data
 
 ```
 sudo usermod -a -G www-data cartong
