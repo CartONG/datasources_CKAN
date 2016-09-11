@@ -36,7 +36,7 @@ ckanext-cartong_theme
    What does it do? What features does it have?
    Consider including some screenshots or embedding a video!
 
-Actuellement en développement, cette extention est le theme Cartong de CKAN. Faite pour référencer les différents catalogues de données disponibles sur le web, elle est un META catalogue. Son principal objectif est de referencer des urls de site "catalogue". La descrition des ressources est faites en fonction des besoins de l'ONG, c'est à dire en fonction des usages humanitaires (risque naturelle, démographie, infrastructure ...). 
+Actuellement en développement, cette extention est le theme Cartong de CKAN. Faite pour référencer les différents catalogues de données disponibles sur le web, elle est un META catalogue . L' objectif est de referencer des urls de site "catalogue". La descrition des ressources est faites en fonction des besoins de l'ONG, c'est à dire en fonction des usages humanitaires (risque naturelle, démographie, infrastructure ...). 
 
 
 ------------
@@ -46,7 +46,7 @@ Requirements
 ckanext-cartong_theme support la version 2.5.2 de CKAN (https://github.com/ckan/ckan.git@ckan-2.5.2)
 
 
-nécéssite l'extention spatiale (https://github.com/okfn/ckanext-spatial.git).
+Nécéssite l'extention spatiale (https://github.com/okfn/ckanext-spatial.git).
 
 et l'extention scheming (https://github.com/ckan/ckanext-scheming)
 
@@ -76,7 +76,10 @@ To install ckanext-cartong_theme:
 
 2. Install the ckanext-cartong_theme Python package into your virtual environment::
 
-     pip install ckanext-cartong_theme
+     git clone https://github.com/cartong/ckanext-cartong_theme.git
+     cd ckanext-cartong_theme
+     python setup.py develop
+     pip install -r prod-requirements.txt
 
 3. Add ``cartong_theme`` to the ``ckan.plugins`` setting in your CKAN
    config file (by default the config file is located at
@@ -115,6 +118,8 @@ do::
 Running the Tests
 -----------------
 
+NOT AVAILABLE YET !
+
 To run the tests, do::
 
     nosetests --nologcapture --with-pylons=test.ini
@@ -128,6 +133,7 @@ coverage installed in your virtualenv (``pip install coverage``) then run::
 ---------------------------------
 Registering ckanext-cartong_theme on PyPI
 ---------------------------------
+NOT AVAILABLE YET !
 
 ckanext-cartong_theme should be availabe on PyPI as
 https://pypi.python.org/pypi/ckanext-cartong_theme. If that link doesn't work, then
@@ -157,6 +163,7 @@ steps:
 ----------------------------------------
 Releasing a New Version of ckanext-cartong_theme
 ----------------------------------------
+NOT AVAILABLE YET !
 
 ckanext-cartong_theme is availabe on PyPI as https://pypi.python.org/pypi/ckanext-cartong_theme.
 To publish a new version to PyPI follow these steps:
