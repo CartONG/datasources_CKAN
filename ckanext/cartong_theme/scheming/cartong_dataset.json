@@ -46,28 +46,55 @@
       "field_name": "theme",
       "label": "Thematique",
       "preset": "multiple_checkbox",
-      "choices": [
+      "choices": [        
         {
-          "value": "catnat",
+          "value": "Basemap",
+          "label": "Fond de carte, imagerie"
+        },
+        {
+          "value": "Boundaries",
+          "label": "Frontières, limtes"
+        },
+        {
+          "value": "Natural disaster",
           "label": "Catastrophe naturelle"
         },
         {
-          "value": "health",
+          "value": "Health",
           "label": "Santé"
         },
         {
-          "value": "demography",
+          "value": "Demography",
           "label": "Démographie"
         },
         {
-          "value": "eduction",
+          "value": "Eduction",
           "label": "Education "
         },
         {
-          "value": "building",
-          "label": "Infrastructure "
+          "value": "Ecology",
+          "label": "Ecologie"
+        },
+        {
+          "value": "Building",
+          "label": "Infrastructure, équipement"
+        },
+        {
+          "value": "Land",
+          "label": "Occupation du sol"
+        },
+        {
+          "value": "Physical ressource",
+          "label": "Ressource naturelle"
+        },
+        {
+          "value": "Elevation",
+          "label": "Relief"
+        },
+        {
+          "value": "Weather",
+          "label": "Climat"
         }
-
       ]
     },
         {
