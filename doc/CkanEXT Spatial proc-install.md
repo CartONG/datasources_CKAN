@@ -1,4 +1,5 @@
 Clone des sources
+
 ```
 pip install -e "git+https://github.com/okfn/ckanext-spatial.git#egg=ckanext-spatial"
 
@@ -8,6 +9,7 @@ pip install -r pip-requirements.txt
 ```
 
 Ajouter les extentions dans le fichier CKAN production.ini
+
 ```
 ckan.plugins = (...) spatial_metadata spatial_query
 
@@ -15,6 +17,7 @@ ckanext.spatial.search_backend = solr
 ```
 
 Ajouter ces paramètres pour modifier les tuiles du widget spatial. (ou mettre à jour CKAN pour que son comportement par defaut ne prennent pas les tuiles mapquests non disponible)
+
 ```
 # Spatial Widget config
 # workaround to get different basemap on the widget
