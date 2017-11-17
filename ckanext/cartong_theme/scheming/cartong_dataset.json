@@ -40,63 +40,8 @@
       "field_name": "tag_string",
       "label": "Tags",
       "preset": "tag_string_autocomplete",
-      "form_placeholder": "eg. economy, mental health, government"
-    },
-    {
-      "field_name": "theme",
-      "label": "Thematique",
-      "preset": "multiple_checkbox",
-      "choices": [        
-        {
-          "value": "Basemap",
-          "label": "Fond de carte, imagerie"
-        },
-        {
-          "value": "Boundaries",
-          "label": "Frontières, limtes"
-        },
-        {
-          "value": "Natural disaster",
-          "label": "Catastrophe naturelle"
-        },
-        {
-          "value": "Health",
-          "label": "Santé"
-        },
-        {
-          "value": "Demography",
-          "label": "Démographie"
-        },
-        {
-          "value": "Eduction",
-          "label": "Education "
-        },
-        {
-          "value": "Ecology",
-          "label": "Ecologie"
-        },
-        {
-          "value": "Building",
-          "label": "Infrastructure, équipement"
-        },
-        {
-          "value": "Land",
-          "label": "Occupation du sol"
-        },
-        {
-          "value": "Physical ressource",
-          "label": "Ressource naturelle"
-        },
-        {
-          "value": "Elevation",
-          "label": "Relief"
-        },
-        {
-          "value": "Weather",
-          "label": "Climat"
-        }
-      ]
-    },
+      "form_placeholder": "eg. Basemap, Boundaries, Disaster, Hydrology, Elevation, Health, Demography, Education, Facilities, Climat"
+    },   
         {
             "field_name": "spatial",
             "label": "Spatial Extent",
@@ -104,30 +49,85 @@
             "form_snippet":"spatial.html",
             "display_snippet":"spatial.html",
             "choices": [
-            {"label":"UK",
+            {"label":"World",
                 "value":{
                     "type":"Polygon",
-                    "coordinates":[[
-                    [-6.41736, 55.7447],
-                    [2.05827, 55.7447],
-                    [2.05827, 49.8625],
-                    [-6.41736, 49.8625],                    
-                    [-6.41736, 55.7447]
+                    "coordinates":
+                    [[
+                      [-180,-90],
+                      [180,-90],
+                      [180,90],
+                      [-180,90],
+                      [-180,-90]
                     ]]
+                    
+                }
+            },            
+            {"label":"Africa",
+                "value":{
+                    "type":"Polygon",
+                    "coordinates":
+                [[[-18.6328125,-36.2442731849],[58.0078125,-36.2442731849],[58.0078125,37.5097258429],[-18.6328125,37.5097258429],[-18.6328125,-36.2442731849]]]                    
                 }
             },
-            {"label":"unknown",
-              "value":{ 
-              "type": "Polygon", 
-              "coordinates": [[ 
-                     [ -17.3035, 32.8807 ], 
-                     [ -16.6635, 32.8807 ], 
-                     [ -16.6635, 32.6075 ], 
-                     [ -17.3035, 32.6075 ],
-                     [ -17.3035, 32.8807 ]
-                     ]] 
+            {"label":"America",
+                "value":{
+                    "type":"Polygon",
+                    "coordinates":
+                    [[[-172.79296875,-58.995311188],[-33.046875,-58.995311188],[-33.046875,71.413176834],[-172.79296875,71.413176834],[-172.79296875,-58.995311188]]]
+                    
+                }
+            },
+            {"label":"Central America",
+                "value":{
+                    "type":"Polygon",
+                    "coordinates":
+                    [[[-130.4296875,-11.5230875069],[-45.3515625,-11.5230875069],[-45.3515625,39.9097362345],[-130.4296875,39.9097362345],[-130.4296875,-11.5230875069]]]                    
+                }
+            },
+            {"label":"South America",
+                "value":{
+                    "type":"Polygon",
+                    "coordinates":
+                    [[[-85.078125,-57.1362393192],[-31.9921875,-57.1362393192],[-31.9921875,13.0687767344],[-85.078125,13.0687767344],[-85.078125,-57.1362393192]]]                }
+            },
+
+            {"label":"Europe",
+                "value":{
+                    "type":"Polygon",
+                    "coordinates":
+              [[[-27.0263671875,36.1023764487],[41.220703125,36.1023764487],[41.220703125,71.3570665496],[-27.0263671875,71.3570665496],[-27.0263671875,36.1023764487]]]
               }
-             } 
+            },
+            {"label":"Orient",
+                "value":{
+                    "type":"Polygon",
+                    "coordinates":
+                [[[26.8725585938,10.6606079536],[78.57421875,10.6606079536],[78.57421875,55.078367232],[26.8725585938,55.078367232],[26.8725585938,10.6606079536]]]            
+              }         
+             },
+
+             {"label":"Océania",
+                "value":{
+                    "type":"Polygon",
+                    "coordinates":
+                [[[93.33984375,-48.8502581997],[-179.912109375,-48.8502581997],[-179.912109375,10.7253812855],[93.33984375,10.7253812855],[93.33984375,-48.8502581997]]]              }
+            },
+            {"label":"South-East Asia",
+                "value":{
+                    "type":"Polygon",
+                    "coordinates":
+                [[[67.763671875,0.3955046715],[146.513671875,0.3955046715],[146.513671875,55.6775844111],[67.763671875,55.6775844111],[67.763671875,0.3955046715]]]
+              }
+            },
+            {"label":"Pacific",
+                "value":{
+                    "type":"Polygon",
+                    "coordinates":
+                [[[154.3359375,-55.1788676633],[-78.3984375,-55.1788676633],[-78.3984375,54.3677585241],[154.3359375,54.3677585241],[154.3359375,-55.1788676633]]]
+                   }
+            }
+
             ]
         },
 
@@ -171,7 +171,7 @@
     {
       "field_name": "format",
       "label": "Format",
-      "preset": "resource_format_autocomplete"
+      "preset": "resource_format_autocomplete",
     }
   ]
 }
