@@ -115,7 +115,6 @@ sudo chown -R `whoami` /etc/ckan/
 Créer le fichier ini (dev)
 
 ```
-
 paster make-config ckan /etc/ckan/default/development.ini
 ```
 
@@ -129,7 +128,7 @@ site_url=http://datasources.cartong.org/
 
 #Configurer Jetty pour Solr
 ```
-sudo nano /etc/defautl/jetty8
+sudo nano /etc/default/jetty8
 
 
 NO_START=0            # (line 4)
@@ -231,6 +230,7 @@ cp /etc/ckan/default/development.ini /etc/ckan/default/production.ini
 
 nano /etc/ckan/default/apache.wsgi
 ```
+
 ```
 import os
 activate_this = os.path.join('/usr/lib/ckan/default/bin/activate_this.py')
@@ -386,49 +386,18 @@ Poste de dev >> github >> serveur cartong
 
 Si plusieur Dev, avant chaque push on pull.
 
-Sur le serveur on ne fait que du Pushing ! 
+Sur le serveur on ne fait que du status, fetch and Pull ! 
 
 
 
 ## Repertoire git sur le serveur
 
-Seul les répertoires Git seront mis à jour.
+les sources de CKAN et CKAN-ext sont installées ici  :
+~~~
+/usr/lib/ckan/default/src/
+~~~
 
-Pour l'instant seul les extentions de CKAN sont gitée :
-
-- ckanext-cartong-theme
-- ckanext-spatial
-- ckanext-sheming
-
-
-## Install et init d'un nouveau repository
-```
-git init
-```
-
-### config git
-
-```
-git config --global user.name ***
-git config --global user.email ***
-```
-
-### .gitignore
-
-> à faire
-
-
-### Pense bête des commandes git utiles
-
-```
-git add -A .
-git commit -m "init"
-git remote add origin https://github.com/***/ckanext-cartong_theme.git
-git push origin master
-git pull https://github.com/***/ckanext-cartong_theme.git master
-git pull https://github.com/geodatup/ckanext-cartong_theme.git master
-
-```
+Seul les répertoires Git pourront être mis à jour.
 
 # troubleshouting
 

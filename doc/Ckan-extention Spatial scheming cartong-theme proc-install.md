@@ -1,16 +1,52 @@
+
+Pour l'instant seules les extentions de CKAN sont git :
+
+- ckanext-cartong-theme
+- ckanext-spatial
+- ckanext-scheming
+
+
+## Install et init d'un nouveau repository
+```
+git init
+```
+
+### config git
+
+```
+git config --global user.name ***
+git config --global user.email ***
+```
+
+### Pense bête des commandes git utiles
+
+```
+git add -A .
+git commit -m "init"
+git remote add origin https://github.com/***/ckanext-cartong_theme.git
+git push origin master
+git pull https://github.com/***/ckanext-cartong_theme.git master
+
+```
+
+
 Clone des sources
 
 ```
 pip install -e "git+https://github.com/okfn/ckanext-spatial.git#egg=ckanext-spatial"
 
-cd /home/cartong/ckan/lib/default/src/ckanext-spatial
+cd /usr/lib/ckan/default/src/ckanext-spatial
 
 pip install -r pip-requirements.txt
+python setup.py develop
 ```
 
 Ajouter les extentions dans le fichier CKAN production.ini
 
+/etc/ckan/default/production.ini
+
 ```
+
 ckan.plugins = (...) spatial_metadata spatial_query
 
 ckanext.spatial.search_backend = solr
@@ -64,15 +100,31 @@ Check pgis tables
 
 ```
 
+
+
+
+# Utilisation de JTS pour les requetes spatial à partir de polygon JSON
+https://gist.github.com/u10313335/5649488bc3a4037e1357
+
+~~~
+sudo apt-get install unzip
+wget http://downloads.sourceforge.net/project/jts-topo-suite/jts/1.13/jts-1.13.zip
+unzip jts-1.13.zip
+cp lib/*.jar /usr/share/solr/web/WEB-INF/lib/
+cp lib/*.jar /opt/solr-5.5.5/server/lib/
+~~~
+service solr restart
+
+
+
+ckanext.spatial.search_backend = solr-spatial-field
+
+
 # Modification des templates de saisie des données
-Modifier le template pour avoir le widget spatial search
+##Modifier le template pour avoir le widget spatial search
 ceci est créer dans l'extention cartong-extention-template
-modifier le template pour avoir le widget spatial pour un dataset
+##Modifier le template pour avoir le widget spatial pour un dataset
 ceci est créer dans l'extention cartong-extention-template
-
-
-
-
 
 
 
