@@ -1,35 +1,10 @@
-
-
 # Installation serveur web
 
-
-Arreter apache (si existant)
-
-```
-sudo /etc/init.d/apache2 stop
-```
 
 Installer nginx apache2 etc..
 
 ```
 sudo apt-get install -y nginx apache2 libapache2-mod-wsgi libpq5
-```
-
-Arreter nginx
-
-```
-sudo /etc/init.d/nginx stop
-```
-
-Redemarer apache
-
-```
-sudo /etc/init.d/apache2 start
-```
-Redemarer nginx
-
-```
-sudo /etc/init.d/nginx restart
 ```
 
 
@@ -392,12 +367,10 @@ Sur le serveur on ne fait que du status, fetch and Pull !
 
 ## Repertoire git sur le serveur
 
-les sources de CKAN et CKAN-ext sont installées ici  :
+les sources de CKAN et EXTENTIONS sont installées ici  :
 ~~~
 /usr/lib/ckan/default/src/
 ~~~
-
-Seul les répertoires Git pourront être mis à jour.
 
 # troubleshouting
 
